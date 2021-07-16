@@ -30,9 +30,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String text = 'Tap in fab for load info';
+  String textInfo = 'Tap in fab for load info';
+  String textTest = '...';
   late SearchReply reply;
-  late DeviceInfoResponse response;
+  late DeviceInfoReply deviceInfoReply;
 
   @override
   void didChangeDependencies() async {
@@ -49,9 +50,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> initDeviceInfoRequest() async {
-    DeviceInfoRequest request = DeviceInfoRequest()..query = 'LIBERATO';
+    DeviceInfoRequest request = DeviceInfoRequest()..queryInfoDetails = 'InfoDart';
     DeviceInfoApi api = DeviceInfoApi();
-    response = await api.search(request);
+    deviceInfoReply = await api.search(request);
   }
 
   @override
@@ -62,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Text(
-          '$text',
+          '$textInfo',
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -72,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
           await initDeviceInfoRequest();
 
           setState(() {
-            text = response.result!;
+            textInfo = deviceInfoReply.infoDetailsResult!;
           });
         },
         tooltip: 'Tap to get device details',

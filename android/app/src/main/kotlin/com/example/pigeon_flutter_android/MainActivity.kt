@@ -18,11 +18,10 @@ class MainActivity: FlutterActivity() {
     }
 
     private class MyApiInfo : DeviceInfoApi {
-        override fun search(request: DeviceInfoRequest): DeviceInfoResponse {
-            val reply = DeviceInfoResponse()
-            //reply.result = String.format("Hi %s!", request.query + " device info :)")
-            reply.result = String.format("Hi %s!", DeviceDetails.getDeviceSuperInfo())
-            Log.i("resposta", String.format("Hi %s!", request.query))
+        override fun search(request: DeviceInfoRequest): DeviceInfoReply {
+            val reply = DeviceInfoReply()
+            reply.infoDetailsResult = String.format("Hi %s! [%s]", DeviceDetails.getDeviceSuperInfo(), request.queryInfoDetails)
+            Log.i("resposta", String.format("Hi %s!", request.queryInfoDetails))
             return reply
         }
     }

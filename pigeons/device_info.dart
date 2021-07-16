@@ -1,14 +1,14 @@
 import 'package:pigeon/pigeon.dart';
 
 class DeviceInfoRequest {
-  String? query;
+  String? queryInfoDetails;
 }
 
-class DeviceInfoResponse {
-  String? result;
+class DeviceInfoReply {
+  String? infoDetailsResult;
 }
 
 @HostApi()
 abstract class DeviceInfoApi {
-  DeviceInfoResponse search(DeviceInfoRequest request);
+  DeviceInfoReply search(DeviceInfoRequest request);
 }

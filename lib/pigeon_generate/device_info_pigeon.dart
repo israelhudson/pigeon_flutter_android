@@ -8,34 +8,34 @@ import 'dart:typed_data' show Uint8List, Int32List, Int64List, Float64List;
 import 'package:flutter/services.dart';
 
 class DeviceInfoRequest {
-  String? query;
+  String? queryInfoDetails;
 
   Object encode() {
     final Map<Object?, Object?> pigeonMap = <Object?, Object?>{};
-    pigeonMap['query'] = query;
+    pigeonMap['queryInfoDetails'] = queryInfoDetails;
     return pigeonMap;
   }
 
   static DeviceInfoRequest decode(Object message) {
     final Map<Object?, Object?> pigeonMap = message as Map<Object?, Object?>;
     return DeviceInfoRequest()
-      ..query = pigeonMap['query'] as String?;
+      ..queryInfoDetails = pigeonMap['queryInfoDetails'] as String?;
   }
 }
 
-class DeviceInfoResponse {
-  String? result;
+class DeviceInfoReply {
+  String? infoDetailsResult;
 
   Object encode() {
     final Map<Object?, Object?> pigeonMap = <Object?, Object?>{};
-    pigeonMap['result'] = result;
+    pigeonMap['infoDetailsResult'] = infoDetailsResult;
     return pigeonMap;
   }
 
-  static DeviceInfoResponse decode(Object message) {
+  static DeviceInfoReply decode(Object message) {
     final Map<Object?, Object?> pigeonMap = message as Map<Object?, Object?>;
-    return DeviceInfoResponse()
-      ..result = pigeonMap['result'] as String?;
+    return DeviceInfoReply()
+      ..infoDetailsResult = pigeonMap['infoDetailsResult'] as String?;
   }
 }
 
@@ -47,7 +47,7 @@ class DeviceInfoApi {
 
   final BinaryMessenger? _binaryMessenger;
 
-  Future<DeviceInfoResponse> search(DeviceInfoRequest arg) async {
+  Future<DeviceInfoReply> search(DeviceInfoRequest arg) async {
     final Object encoded = arg.encode();
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
         'dev.flutter.pigeon.DeviceInfoApi.search', const StandardMessageCodec(), binaryMessenger: _binaryMessenger);
@@ -67,7 +67,7 @@ class DeviceInfoApi {
         details: error['details'],
       );
     } else {
-      return DeviceInfoResponse.decode(replyMap['result']!);
+      return DeviceInfoReply.decode(replyMap['result']!);
     }
   }
 }

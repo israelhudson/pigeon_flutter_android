@@ -6,7 +6,6 @@ package com.example.pigeon_flutter_android;
 import io.flutter.plugin.common.BasicMessageChannel;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.StandardMessageCodec;
-import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -16,45 +15,45 @@ public class DeviceInfoPigeon {
 
   /** Generated class from Pigeon that represents data sent in messages. */
   public static class DeviceInfoRequest {
-    private String query;
-    public String getQuery() { return query; }
-    public void setQuery(String setterArg) { this.query = setterArg; }
+    private String queryInfoDetails;
+    public String getQueryInfoDetails() { return queryInfoDetails; }
+    public void setQueryInfoDetails(String setterArg) { this.queryInfoDetails = setterArg; }
 
     Map<String, Object> toMap() {
       Map<String, Object> toMapResult = new HashMap<>();
-      toMapResult.put("query", query);
+      toMapResult.put("queryInfoDetails", queryInfoDetails);
       return toMapResult;
     }
     static DeviceInfoRequest fromMap(Map<String, Object> map) {
       DeviceInfoRequest fromMapResult = new DeviceInfoRequest();
-      Object query = map.get("query");
-      fromMapResult.query = (String)query;
+      Object queryInfoDetails = map.get("queryInfoDetails");
+      fromMapResult.queryInfoDetails = (String)queryInfoDetails;
       return fromMapResult;
     }
   }
 
   /** Generated class from Pigeon that represents data sent in messages. */
-  public static class DeviceInfoResponse {
-    private String result;
-    public String getResult() { return result; }
-    public void setResult(String setterArg) { this.result = setterArg; }
+  public static class DeviceInfoReply {
+    private String infoDetailsResult;
+    public String getInfoDetailsResult() { return infoDetailsResult; }
+    public void setInfoDetailsResult(String setterArg) { this.infoDetailsResult = setterArg; }
 
     Map<String, Object> toMap() {
       Map<String, Object> toMapResult = new HashMap<>();
-      toMapResult.put("result", result);
+      toMapResult.put("infoDetailsResult", infoDetailsResult);
       return toMapResult;
     }
-    static DeviceInfoResponse fromMap(Map<String, Object> map) {
-      DeviceInfoResponse fromMapResult = new DeviceInfoResponse();
-      Object result = map.get("result");
-      fromMapResult.result = (String)result;
+    static DeviceInfoReply fromMap(Map<String, Object> map) {
+      DeviceInfoReply fromMapResult = new DeviceInfoReply();
+      Object infoDetailsResult = map.get("infoDetailsResult");
+      fromMapResult.infoDetailsResult = (String)infoDetailsResult;
       return fromMapResult;
     }
   }
 
   /** Generated interface from Pigeon that represents a handler of messages from Flutter.*/
   public interface DeviceInfoApi {
-    DeviceInfoResponse search(DeviceInfoRequest arg);
+    DeviceInfoReply search(DeviceInfoRequest arg);
 
     /** Sets up an instance of `DeviceInfoApi` to handle messages through the `binaryMessenger`. */
     static void setup(BinaryMessenger binaryMessenger, DeviceInfoApi api) {
@@ -67,7 +66,7 @@ public class DeviceInfoPigeon {
             try {
               @SuppressWarnings("ConstantConditions")
               DeviceInfoRequest input = DeviceInfoRequest.fromMap((Map<String, Object>)message);
-              DeviceInfoResponse output = api.search(input);
+              DeviceInfoReply output = api.search(input);
               wrapped.put("result", output.toMap());
             }
             catch (Error | RuntimeException exception) {
