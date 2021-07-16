@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pigeon_flutter_android/pigeon_generate/pigeon.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  dynamic _counter = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -56,7 +57,17 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () async {
+          setState(() async {
+            SearchRequest request = SearchRequest()..query = 'test';
+            Api api = Api();
+            SearchReply reply = await api.search(request);
+            _counter = reply.result;
+           // _counter = Api().search('israel');
+            //_counter = SearchRequest().query;
+            //_counter = SearchReply().result;
+          });
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
