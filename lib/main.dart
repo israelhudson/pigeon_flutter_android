@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pigeon_flutter_android/pigeon_generate/pigeon.dart';
 
+import 'pigeon_generate/device_info_pigeon.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -29,11 +31,27 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   dynamic _counter = 0;
+  late SearchReply reply;
+  late DeviceInfoResponse response;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  void didChangeDependencies() async {
+    await initSearchRequest();
+    await initDeviceInfoRequest();
+
+    super.didChangeDependencies();
+  }
+
+  Future<void> initSearchRequest() async {
+    SearchRequest request = SearchRequest()..query = 'test';
+    Api api = Api();
+    reply = await api.search(request);
+  }
+
+  Future<void> initDeviceInfoRequest() async {
+    DeviceInfoRequest request = DeviceInfoRequest()..query = 'LIBERATO';
+    DeviceInfoApi api = DeviceInfoApi();
+    response = await api.search(request);
   }
 
   @override
@@ -57,15 +75,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          setState(() async {
-            SearchRequest request = SearchRequest()..query = 'test';
-            Api api = Api();
-            SearchReply reply = await api.search(request);
-            _counter = reply.result;
-           // _counter = Api().search('israel');
-            //_counter = SearchRequest().query;
-            //_counter = SearchReply().result;
+        onPressed: () {
+          setState(() {
+            //_counter = reply.result;
+            _counter = response.result;
           });
         },
         tooltip: 'Increment',

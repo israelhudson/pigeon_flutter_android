@@ -12,10 +12,10 @@ import java.util.HashMap;
 
 /** Generated class from Pigeon. */
 @SuppressWarnings({"unused", "unchecked", "CodeBlock2Expr", "RedundantSuppression"})
-public class Pigeon {
+public class DeviceInfoPigeon {
 
   /** Generated class from Pigeon that represents data sent in messages. */
-  public static class SearchRequest {
+  public static class DeviceInfoRequest {
     private String query;
     public String getQuery() { return query; }
     public void setQuery(String setterArg) { this.query = setterArg; }
@@ -25,8 +25,8 @@ public class Pigeon {
       toMapResult.put("query", query);
       return toMapResult;
     }
-    static SearchRequest fromMap(Map<String, Object> map) {
-      SearchRequest fromMapResult = new SearchRequest();
+    static DeviceInfoRequest fromMap(Map<String, Object> map) {
+      DeviceInfoRequest fromMapResult = new DeviceInfoRequest();
       Object query = map.get("query");
       fromMapResult.query = (String)query;
       return fromMapResult;
@@ -34,7 +34,7 @@ public class Pigeon {
   }
 
   /** Generated class from Pigeon that represents data sent in messages. */
-  public static class SearchReply {
+  public static class DeviceInfoResponse {
     private String result;
     public String getResult() { return result; }
     public void setResult(String setterArg) { this.result = setterArg; }
@@ -44,8 +44,8 @@ public class Pigeon {
       toMapResult.put("result", result);
       return toMapResult;
     }
-    static SearchReply fromMap(Map<String, Object> map) {
-      SearchReply fromMapResult = new SearchReply();
+    static DeviceInfoResponse fromMap(Map<String, Object> map) {
+      DeviceInfoResponse fromMapResult = new DeviceInfoResponse();
       Object result = map.get("result");
       fromMapResult.result = (String)result;
       return fromMapResult;
@@ -53,21 +53,21 @@ public class Pigeon {
   }
 
   /** Generated interface from Pigeon that represents a handler of messages from Flutter.*/
-  public interface Api {
-    SearchReply search(SearchRequest arg);
+  public interface DeviceInfoApi {
+    DeviceInfoResponse search(DeviceInfoRequest arg);
 
-    /** Sets up an instance of `Api` to handle messages through the `binaryMessenger`. */
-    static void setup(BinaryMessenger binaryMessenger, Api api) {
+    /** Sets up an instance of `DeviceInfoApi` to handle messages through the `binaryMessenger`. */
+    static void setup(BinaryMessenger binaryMessenger, DeviceInfoApi api) {
       {
         BasicMessageChannel<Object> channel =
-            new BasicMessageChannel<>(binaryMessenger, "dev.flutter.pigeon.Api.search", new StandardMessageCodec());
+            new BasicMessageChannel<>(binaryMessenger, "dev.flutter.pigeon.DeviceInfoApi.search", new StandardMessageCodec());
         if (api != null) {
           channel.setMessageHandler((message, reply) -> {
             Map<String, Object> wrapped = new HashMap<>();
             try {
               @SuppressWarnings("ConstantConditions")
-              SearchRequest input = SearchRequest.fromMap((Map<String, Object>)message);
-              SearchReply output = api.search(input);
+              DeviceInfoRequest input = DeviceInfoRequest.fromMap((Map<String, Object>)message);
+              DeviceInfoResponse output = api.search(input);
               wrapped.put("result", output.toMap());
             }
             catch (Error | RuntimeException exception) {
