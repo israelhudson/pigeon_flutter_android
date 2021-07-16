@@ -30,14 +30,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  dynamic _counter = 0;
+  String text = 'Tap in fab for load info';
   late SearchReply reply;
   late DeviceInfoResponse response;
 
   @override
   void didChangeDependencies() async {
-    await initSearchRequest();
-    await initDeviceInfoRequest();
+   await initSearchRequest();
+   await initDeviceInfoRequest();
 
     super.didChangeDependencies();
   }
@@ -61,28 +61,22 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        child: Text(
+          '$text',
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
+
+          //await initSearchRequest();
+          await initDeviceInfoRequest();
+
           setState(() {
-            //_counter = reply.result;
-            _counter = response.result;
+            text = response.result!;
           });
         },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        tooltip: 'Tap to get device details',
+        child: Icon(Icons.perm_device_info),
       ),
     );
   }

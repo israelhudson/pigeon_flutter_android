@@ -17,11 +17,11 @@ class MainActivity: FlutterActivity() {
         }
     }
 
-    private class MyApi2 : DeviceInfoApi {
+    private class MyApiInfo : DeviceInfoApi {
         override fun search(request: DeviceInfoRequest): DeviceInfoResponse {
             val reply = DeviceInfoResponse()
             //reply.result = String.format("Hi %s!", request.query + " device info :)")
-            reply.result = String.format("Hi %s!", android.os.Build.MODEL)
+            reply.result = String.format("Hi %s!", DeviceDetails.getDeviceSuperInfo())
             Log.i("resposta", String.format("Hi %s!", request.query))
             return reply
         }
@@ -30,7 +30,7 @@ class MainActivity: FlutterActivity() {
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         Api.setup(flutterEngine.dartExecutor.binaryMessenger, MyApi())
-        DeviceInfoApi.setup(flutterEngine.dartExecutor.binaryMessenger, MyApi2())
+        DeviceInfoApi.setup(flutterEngine.dartExecutor.binaryMessenger, MyApiInfo())
 
     }
 }
