@@ -39,7 +39,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -75,3 +74,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+scripts:
+  codepigeon: flutter pub run pigeon \ --input pigeons/device_info.dart \ --dart_out lib/pigeon_generate/device_info_pigeon.dart \ --java_out ./android/app/src/main/kotlin/com/example/pigeon_flutter_android/DeviceInfoPigeon.java \ --java_package "dev.flutter.pigeon"
+  codepigeoninfo: flutter pub run pigeon \ --input pigeons/device_info.dart \ --dart_out lib/pigeon_generate/device_info_pigeon.dart \

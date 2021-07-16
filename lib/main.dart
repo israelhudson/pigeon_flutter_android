@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pigeon_flutter_android/pigeon_generate/pigeon.dart';
 
+import 'pigeon_generate/device_info_pigeon.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -28,12 +30,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  dynamic _counter = 0;
+  String textInfo = 'Tap in fab for load info';
+  String textTest = '...';
+  late SearchReply reply;
+  late DeviceInfoReply deviceInfoReply;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  void didChangeDependencies() async {
+   await initSearchRequest();
+   await initDeviceInfoRequest();
+
+    super.didChangeDependencies();
+  }
+
+  Future<void> initSearchRequest() async {
+    SearchRequest request = SearchRequest()..query = 'test';
+    Api api = Api();
+    reply = await api.search(request);
+  }
+
+  Future<void> initDeviceInfoRequest() async {
+    DeviceInfoRequest request = DeviceInfoRequest()..queryInfoDetails = 'InfoDart';
+    DeviceInfoApi api = DeviceInfoApi();
+    deviceInfoReply = await api.search(request);
   }
 
   @override
@@ -43,33 +62,22 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        child: Text(
+          '$textInfo',
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          setState(() async {
-            SearchRequest request = SearchRequest()..query = 'test';
-            Api api = Api();
-            SearchReply reply = await api.search(request);
-            _counter = reply.result;
-           // _counter = Api().search('israel');
-            //_counter = SearchRequest().query;
-            //_counter = SearchReply().result;
+
+          //await initSearchRequest();
+          await initDeviceInfoRequest();
+
+          setState(() {
+            textInfo = deviceInfoReply.infoDetailsResult!;
           });
         },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        tooltip: 'Tap to get device details',
+        child: Icon(Icons.perm_device_info),
       ),
     );
   }

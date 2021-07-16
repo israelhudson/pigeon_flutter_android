@@ -12,62 +12,62 @@ import java.util.HashMap;
 
 /** Generated class from Pigeon. */
 @SuppressWarnings({"unused", "unchecked", "CodeBlock2Expr", "RedundantSuppression"})
-public class Pigeon {
+public class DeviceInfoPigeon {
 
   /** Generated class from Pigeon that represents data sent in messages. */
-  public static class SearchRequest {
-    private String query;
-    public String getQuery() { return query; }
-    public void setQuery(String setterArg) { this.query = setterArg; }
+  public static class DeviceInfoRequest {
+    private String queryInfoDetails;
+    public String getQueryInfoDetails() { return queryInfoDetails; }
+    public void setQueryInfoDetails(String setterArg) { this.queryInfoDetails = setterArg; }
 
     Map<String, Object> toMap() {
       Map<String, Object> toMapResult = new HashMap<>();
-      toMapResult.put("query", query);
+      toMapResult.put("queryInfoDetails", queryInfoDetails);
       return toMapResult;
     }
-    static SearchRequest fromMap(Map<String, Object> map) {
-      SearchRequest fromMapResult = new SearchRequest();
-      Object query = map.get("query");
-      fromMapResult.query = (String)query;
+    static DeviceInfoRequest fromMap(Map<String, Object> map) {
+      DeviceInfoRequest fromMapResult = new DeviceInfoRequest();
+      Object queryInfoDetails = map.get("queryInfoDetails");
+      fromMapResult.queryInfoDetails = (String)queryInfoDetails;
       return fromMapResult;
     }
   }
 
   /** Generated class from Pigeon that represents data sent in messages. */
-  public static class SearchReply {
-    private String result;
-    public String getResult() { return result; }
-    public void setResult(String setterArg) { this.result = setterArg; }
+  public static class DeviceInfoReply {
+    private String infoDetailsResult;
+    public String getInfoDetailsResult() { return infoDetailsResult; }
+    public void setInfoDetailsResult(String setterArg) { this.infoDetailsResult = setterArg; }
 
     Map<String, Object> toMap() {
       Map<String, Object> toMapResult = new HashMap<>();
-      toMapResult.put("result", result);
+      toMapResult.put("infoDetailsResult", infoDetailsResult);
       return toMapResult;
     }
-    static SearchReply fromMap(Map<String, Object> map) {
-      SearchReply fromMapResult = new SearchReply();
-      Object result = map.get("result");
-      fromMapResult.result = (String)result;
+    static DeviceInfoReply fromMap(Map<String, Object> map) {
+      DeviceInfoReply fromMapResult = new DeviceInfoReply();
+      Object infoDetailsResult = map.get("infoDetailsResult");
+      fromMapResult.infoDetailsResult = (String)infoDetailsResult;
       return fromMapResult;
     }
   }
 
   /** Generated interface from Pigeon that represents a handler of messages from Flutter.*/
-  public interface Api {
-    SearchReply search(SearchRequest arg);
+  public interface DeviceInfoApi {
+    DeviceInfoReply search(DeviceInfoRequest arg);
 
-    /** Sets up an instance of `Api` to handle messages through the `binaryMessenger`. */
-    static void setup(BinaryMessenger binaryMessenger, Api api) {
+    /** Sets up an instance of `DeviceInfoApi` to handle messages through the `binaryMessenger`. */
+    static void setup(BinaryMessenger binaryMessenger, DeviceInfoApi api) {
       {
         BasicMessageChannel<Object> channel =
-            new BasicMessageChannel<>(binaryMessenger, "dev.flutter.pigeon.Api.search", new StandardMessageCodec());
+            new BasicMessageChannel<>(binaryMessenger, "dev.flutter.pigeon.DeviceInfoApi.search", new StandardMessageCodec());
         if (api != null) {
           channel.setMessageHandler((message, reply) -> {
             Map<String, Object> wrapped = new HashMap<>();
             try {
               @SuppressWarnings("ConstantConditions")
-              SearchRequest input = SearchRequest.fromMap((Map<String, Object>)message);
-              SearchReply output = api.search(input);
+              DeviceInfoRequest input = DeviceInfoRequest.fromMap((Map<String, Object>)message);
+              DeviceInfoReply output = api.search(input);
               wrapped.put("result", output.toMap());
             }
             catch (Error | RuntimeException exception) {
